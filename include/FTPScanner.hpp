@@ -60,8 +60,7 @@ class FTPScanner {
 
  public:
   explicit FTPScanner
-      (string  p =
-           "/home/lamp/CLionProjects/Lab04/lab-04-boost-filesystem/misc/ftp");
+      (string  p = ".");
   void Scan(const fs::path& p, std::shared_ptr<Broker> b);
   friend std::ostream& operator<<
       (std::ostream& os, const FTPScanner& scanner);
