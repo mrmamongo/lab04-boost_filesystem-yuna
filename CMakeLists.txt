@@ -23,8 +23,8 @@ string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
 string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
 string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 
-#hunter_add_package(GTest)
-#find_package(GTest CONFIG REQUIRED)
+hunter_add_package(GTest)
+find_package(GTest CONFIG REQUIRED)
 
 hunter_add_package(Boost COMPONENTS system filesystem)
 find_package(Boost 1.72.0 CONFIG REQUIRED system filesystem)
@@ -32,13 +32,12 @@ find_package(Boost 1.72.0 CONFIG REQUIRED system filesystem)
 add_library(scanner STATIC
         sources/FTPScanner.cpp
         )
-
 add_executable(boost_filesystem
         sources/main.cpp
         )
-#add_executable(tests
-#  ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
-#)
+add_executable(tests
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
+)
 
 target_include_directories(scanner
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -46,31 +45,31 @@ target_include_directories(scanner
 target_include_directories(boost_filesystem
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
-#target_include_directories(tests
-#  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
-#)
+target_include_directories(tests
+  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
 
-#target_link_libraries(tests GTest::gtest_main scanner)
+target_link_libraries(tests GTest::gtest_main scanner)
 target_link_libraries(boost_filesystem scanner)
 target_link_libraries(scanner Boost::filesystem)
 
 file(COPY misc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
-#enable_testing()
-#add_test(NAME unit_tests COMMAND tests)
-#
-#if(BUILD_COVERAGE)
-#  function(ENABLE_PROJECT_COVERAGE PROJECT)
-#    target_compile_options(${PROJECT} PRIVATE --coverage)
-#    target_link_libraries(${PROJECT} --coverage)
-#    add_coverage(${PROJECT})
-#  endfunction()
-#
-#  set(ENABLE_COVERAGE ON CACHE BOOL "Enable coverage build." FORCE)
-#  list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-#  find_package(codecov)
-#  enable_project_coverage(scanner)
-#  enable_project_coverage(tests)
-#  list(APPEND LCOV_REMOVE_PATTERNS "'${PROJECT_SOURCE_DIR}/tests/*'")
-#  coverage_evaluate()
-#endif()
+enable_testing()
+add_test(NAME unit_tests COMMAND tests)
+
+if(BUILD_COVERAGE)
+  function(ENABLE_PROJECT_COVERAGE PROJECT)
+    target_compile_options(${PROJECT} PRIVATE --coverage)
+    target_link_libraries(${PROJECT} --coverage)
+   add_coverage(${PROJECT})
+  endfunction()
+
+  set(ENABLE_COVERAGE ON CACHE BOOL "Enable coverage build." FORCE)
+  list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+  find_package(codecov)
+  enable_project_coverage(scanner)
+  enable_project_coverage(tests)
+  list(APPEND LCOV_REMOVE_PATTERNS "'${PROJECT_SOURCE_DIR}/tests/*'")
+  coverage_evaluate()
+endif()
