@@ -1,4 +1,5 @@
-# Лабораторная работа №4]
+# Лабораторная работа №4
+
 | branch | status |
 |--------|--------|
 |  dev   | [![CI](https://github.com/mrmamongo/lab04-boost_filesystem-yuna/workflows/CI/badge.svg?branch=dev)](https://github.com/mrmamongo/lab04-boost_filesystem-yuna/actions/runs/406856532)
