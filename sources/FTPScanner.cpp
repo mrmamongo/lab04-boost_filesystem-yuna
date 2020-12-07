@@ -32,7 +32,7 @@ void FTPScanner::Scan(const fs::path& p, std::shared_ptr<Broker> b) {
                 ) {
               brokers.insert(std::make_pair(b->name, b));
             }
-          } else {
+          } else if (is_regular_file(x)){
             if(
                 x.path().stem().extension() != ".old" &&
                 x.path().stem() != "readme" &&
@@ -42,8 +42,12 @@ void FTPScanner::Scan(const fs::path& p, std::shared_ptr<Broker> b) {
                    << x.path().filename().string() << endl;
               Account::Scan(x, b);
             }
+          } else if (is_symlink(x)) {
+            Scan(read_symlink(x), b);
           }
         }
+      } else if (is_symlink(p)) {
+        Scan(read_symlink(p), b);
       }
       else
         throw
