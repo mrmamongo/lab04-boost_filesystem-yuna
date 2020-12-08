@@ -32,7 +32,7 @@ find_package(Boost 1.72.0 CONFIG REQUIRED system filesystem)
 add_library(scanner STATIC
         sources/FTPScanner.cpp
         )
-add_executable(boost_filesystem
+add_executable(main
         sources/main.cpp
         )
 add_executable(tests
@@ -42,7 +42,7 @@ add_executable(tests
 target_include_directories(scanner
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
-target_include_directories(boost_filesystem
+target_include_directories(main
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 target_include_directories(tests
@@ -50,7 +50,7 @@ target_include_directories(tests
 )
 
 target_link_libraries(tests GTest::gtest_main scanner)
-target_link_libraries(boost_filesystem scanner)
+target_link_libraries(main scanner)
 target_link_libraries(scanner Boost::filesystem)
 
 file(COPY misc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
@@ -68,7 +68,7 @@ if(BUILD_COVERAGE)
   set(ENABLE_COVERAGE ON CACHE BOOL "Enable coverage build." FORCE)
   list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
   find_package(codecov)
-  enable_project_coverage(scanner)
+  enable_project_coverage(main)
   enable_project_coverage(tests)
   list(APPEND LCOV_REMOVE_PATTERNS "'${PROJECT_SOURCE_DIR}/tests/*'")
   coverage_evaluate()
