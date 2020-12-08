@@ -1,3 +1,4 @@
+// Copyright 2020 lamp
 //
 // Created by lamp on 07.12.2020.
 //
