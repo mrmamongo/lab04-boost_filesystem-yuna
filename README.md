@@ -4,6 +4,8 @@
 |--------|--------|
 |  dev   | [![CI](https://github.com/mrmamongo/lab04-boost_filesystem-yuna/workflows/CI/badge.svg?branch=dev)](https://github.com/mrmamongo/lab04-boost_filesystem-yuna/actions/runs/406856532)
 
+[![CI](https://github.com/Boryabes/lab1_student_json_parser/workflows/CI/badge.svg?branch=development)](https://github.com/Boryabes/lab1_student_json_parser/actions/runs/409002672)
+
 Лабораторная работа посвящена изучению работы с файловой системой на языке **C++**. В стандарте **C++17** появилась библиотека для работы с [файловой системой](https://en.cppreference.com/w/cpp/filesystem). Но так как на данный момент еще не все компиляторы поддерживают новейший стандарт **C++** в этой лабораторный используется библиотека **boost::filesystem**, которая была взята за основу при разработке стандарта.
 
 ## Задание
